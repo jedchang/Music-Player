@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Music Player</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/76e0eab772.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="my-albums">
+        <a href="javascript:;" class="btn-albums"
+          ><i class="material-icons">
+            library_music
+          </i>
+          My Albums</a
+        >
+        <div class="my-albums-list">
+          <a
+            href="javascript:;"
+            class="btn-album"
+            :class="{'current' : index === isCurrent}"
+            v-for="(btn,index) in albums"
+            @click="changeAlbum(btn, index)"
+          >
+            {{ btn.albumName }}
+          </a>
+        </div>
+        <div class="album-bottom">
+          <div class="play-info">
+            <div class="play-status">
+              <p class="txt">Play Now</p>
+              <img src="./images/animated-sound-bars.gif" class="sound" alt="" v-if="isPlaying" />
+            </div>
+            <div class="play-album-name select" v-if="isAlbum === ''">-- Select Album --</div>
+            <div class="play-album-name" v-else>{{ isAlbum }}</div>
+          </div>
+          <div class="play-song-name select" v-if="isSong === ''">-- Select Song --</div>
+          <div class="play-song-name" v-else>{{ isSong }}</div>
+          <img :src="isCover" alt="" class="cover" />
+          <!-- <img :src="isCover" alt="" class="cover" v-else /> -->
+        </div>
+      </div>
+
+      <!-- main -->
+      <div class="main">
+        <!-- album lists -->
+        <div class="albums">
+          <div class="album-top">
+            <div class="search-bar">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search" class="search-input" />
+            </div>
+            <div class="dropdown user-profile">
+              <button
+                class="btn dropdown-toggle custom-btn"
+                type="button"
+                id="userMenu"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <div class="photo">
+                  <img src="https://images2.imgbox.com/61/7d/UskGXtvx_o.jpg" />
+                </div>
+                <div class="name">Admin</div>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="userMenu">
+                <a class="dropdown-item" href="javascript:;">My Profile</a>
+                <a class="dropdown-item" href="javascript:;">Log Out</a>
+              </div>
+            </div>
+          </div>
+          <div class="album-banner" :style="{backgroundImage:'url('+ currentAlbum.bgUrl +')'}">
+            <img :src="currentAlbum.coverUrl" alt="" class="banner-cover" />
+            <div class="album-content">
+              <div class="album-info">
+                <h3 class="album-name">{{ currentAlbum.albumName }}</h3>
+                <p class="artist-name">{{ currentAlbum.artist }}</p>
+              </div>
+              <a href="javascript:;" class="btn-play-album" @click="albumList">
+                <i class="material-icons">
+                  queue_music
+                </i>
+                Album List</a
+              >
+            </div>
+          </div>
+          <div class="album-lists">
+            <a
+              href="javascript:;"
+              class="album-item"
+              :class="{'current' : index === isCurrent}"
+              :data-num="item.id"
+              v-for="(item,index) in albums"
+              @click="changeAlbum(item, index)"
+            >
+              <img :src="item.coverUrl" alt="" class="album-cover" />
+              <div class="album-name">{{ item.albumName }}</div>
+            </a>
+          </div>
+        </div>
+        <!-- play lists -->
+        <div class="playlists" :style="{backgroundImage:'url('+ currentAlbum.bgUrl +')'}">
+          <div class="album-top">
+            <div class="search-bar">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search" class="search-input" />
+            </div>
+            <div class="dropdown user-profile">
+              <button
+                class="btn dropdown-toggle custom-btn"
+                type="button"
+                id="userMenu"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <div class="photo">
+                  <img src="https://images2.imgbox.com/61/7d/UskGXtvx_o.jpg" />
+                </div>
+                <div class="name">Admin</div>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="userMenu">
+                <a class="dropdown-item" href="javascript:;">My Profile</a>
+                <a class="dropdown-item" href="javascript:;">Log Out</a>
+              </div>
+            </div>
+          </div>
+          <div class="album-banner">
+            <img :src="currentAlbum.coverUrl" alt="" class="banner-cover" />
+            <div class="album-content">
+              <div class="album-info">
+                <h3 class="album-name">{{ currentAlbum.albumName }}</h3>
+                <p class="artist-name">{{ currentAlbum.artist }}</p>
+              </div>
+              <div class="back-album">
+                <a href="javascript:;" class="btn-back-album" @click="enterAlbum">
+                  <i class="fas fa-arrow-left"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="play-lists">
+            <a
+              href="javascript:;"
+              class="list-item"
+              :class="{'active' : index === isActiveIdx}"
+              v-for="(song, index) in songs"
+              @click="changeSong(song, index)"
+            >
+              <div class="num">
+                <i class="material-icons">
+                  audiotrack
+                </i>
+                {{ song.id }}
+              </div>
+              <div class="song-name">{{ song.songName }}</div>
+              <div class="info">
+                <div class="duration">{{ song.timeSeconds }}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="player">
+          <div class="player-timeline">
+            <div class="progress-container">
+              <div id="progress-wrap" class="progress">
+                <div class="progress-handle" :style="{left:progressPercentageValue}"></div>
+                <div class="transparent-seeker-layer"></div>
+                <div class="bar" :style="{width:progressPercentageValue}"></div>
+              </div>
+            </div>
+          </div>
+          <div class="status">
+            <div class="time" v-if="!isLoaded">
+              00:00 / 00:00
+            </div>
+            <div class="time" :class="[isAlbum && isSong ? showClass  : '' ]" v-else>
+              {{ currentPlayedTime }} / {{ duration }}
+            </div>
+            <div class="control" :class="[isAlbum && isSong ? showClass  : '' ]">
+              <a href="javascript:;" class="btn btn-random">
+                <i class="material-icons">
+                  shuffle
+                </i>
+              </a>
+              <a href="javascript:;" class="btn btn-prev">
+                <i class="material-icons">
+                  skip_previous
+                </i>
+              </a>
+
+              <a href="javascript:;" class="btn btn-play" v-if="!isPlaying" @click="playCurrentSong">
+                <i class="material-icons">
+                  play_circle_outline
+                </i>
+              </a>
+              <a href="javascript:;" class="btn btn-play" v-if="isPlaying" @click="pause">
+                <i class="material-icons">
+                  pause_circle_outline
+                </i>
+              </a>
+
+              <a href="javascript:;" class="btn btn-next">
+                <i class="material-icons">
+                  skip_next
+                </i>
+              </a>
+              <a href="javascript:;" class="btn btn-repeat">
+                <i class="material-icons">
+                  repeat
+                </i>
+              </a>
+            </div>
+            <div class="volume">
+              <i class="material-icons">
+                volume_up
+              </i>
+              <div class="range-bar">
+                <input type="range" class="range" min="0" max="100" value="0" />
+                <div class="fill" style="width:50%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <audio id="music" loop="innerLoop" :src="currentSong.musicUrl" preload controls></audio>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"
+  ></script>
+  <script src="js/script.js"></script>
+</html>

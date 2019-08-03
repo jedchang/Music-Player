@@ -1,0 +1,1004 @@
+/*----------  share  ----------*/
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #2a2a2a;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+}
+
+.btn.focus,
+.btn:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+/*----------  main  ----------*/
+#app {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  position: relative;
+}
+
+.my-albums {
+  width: 15%;
+  height: 100%;
+  background: #222222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.4);
+          box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.4);
+  z-index: 20;
+}
+
+.my-albums .btn-albums {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 85px;
+  padding: 20px 25px;
+  font-size: 18px;
+  font-weight: 600;
+  background: #161616;
+}
+
+.my-albums .btn-albums:hover {
+  color: #9d68c1;
+}
+
+.my-albums i {
+  margin-right: 7px;
+  font-size: 24px;
+}
+
+.my-albums .my-albums-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.my-albums .btn-album {
+  color: #868686;
+  height: 50px;
+  padding: 12px 26px;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.my-albums .btn-album:hover {
+  color: #e3b8ff;
+  text-shadow: 0 0px 15px #bf89e2;
+}
+
+.my-albums .current {
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #2b293e), to(#3d3533));
+  background: -webkit-linear-gradient(left, #2b293e 20%, #3d3533 100%);
+  background: -o-linear-gradient(left, #2b293e 20%, #3d3533 100%);
+  background: linear-gradient(90deg, #2b293e 20%, #3d3533 100%);
+  cursor: default;
+}
+
+.my-albums .current:hover {
+  color: #fff;
+  text-shadow: none;
+}
+
+.my-albums .album-bottom {
+  width: 15%;
+  height: 215px;
+  position: fixed;
+  bottom: 0;
+}
+
+.my-albums .album-bottom:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.my-albums .album-bottom .cover {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+.my-albums .album-bottom .play-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 12px 26px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 10;
+}
+
+.my-albums .album-bottom .play-status {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.my-albums .album-bottom .play-status .txt {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0;
+  margin-right: 7px;
+}
+
+.my-albums .album-bottom .play-status .sound {
+  width: 20px;
+  height: 20px;
+}
+
+.my-albums .album-bottom .play-album-name {
+  color: #ffc0b7;
+  text-shadow: 0 0px 7px #f5705d;
+  font-size: 18px;
+}
+
+.my-albums .album-bottom .play-album-name.select {
+  color: #cb84fb;
+  text-shadow: 0 0px 7px #811dc5;
+}
+
+.my-albums .album-bottom .play-song-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 12px 26px;
+  font-size: 24px;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.my-albums .album-bottom .play-song-name.select {
+  font-weight: 500;
+  color: #cb84fb;
+  text-shadow: 0 0px 7px #811dc5;
+}
+
+/*----------  main  ----------*/
+.main {
+  width: 85%;
+  height: 100vh;
+  background-color: #2a2a2a;
+  position: relative;
+}
+
+.main .album-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px 60px;
+}
+
+.main .search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 10;
+}
+
+.main .search-bar i {
+  color: #fff;
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.main .search-bar .search-input {
+  color: #9d68c1;
+  background-color: transparent;
+  border: 0;
+}
+
+.main .search-bar .search-input:focus {
+  outline: 0;
+}
+
+.main .search-bar ::-webkit-input-placeholder {
+  color: #484848;
+}
+
+.main .search-bar :-moz-placeholder {
+  color: #484848;
+}
+
+.main .search-bar ::-moz-placeholder {
+  color: #484848;
+}
+
+.main .search-bar :-ms-input-placeholder {
+  color: #484848;
+}
+
+.main .user-profile {
+  z-index: 10;
+}
+
+.main .user-profile .btn {
+  font-size: 14px;
+}
+
+.main .user-profile .custom-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: transparent;
+  color: #9b9b9b;
+  font-weight: 500;
+  position: relative;
+}
+
+.main .user-profile .photo {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 50%;
+}
+
+.main .user-profile .photo img {
+  max-width: 100%;
+}
+
+.main .user-profile .name {
+  font-size: 16px;
+  line-height: 30px;
+  margin: 0 10px;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.main .user-profile .dropdown-menu {
+  font-size: 16px;
+}
+
+.main .user-profile .dropdown-item:hover,
+.main .user-profile .dropdown-item:active {
+  color: #fff;
+  background-color: #9d68c1;
+}
+
+/*----------  player  ----------*/
+.player {
+  width: 85%;
+  height: 85px;
+  background-color: #1d1d1d;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.player i {
+  color: #474747;
+}
+
+.player .player-timeline {
+  position: relative;
+  z-index: 2;
+}
+
+.player .progress-container {
+  position: relative;
+  height: 10px;
+  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.player .progress-container .progress {
+  background-color: rgba(0, 0, 0, 0.05);
+  height: 4px;
+  width: 100%;
+  margin: 0;
+  padding: 0 2px;
+  border-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.player .progress-container .progress-handle {
+  display: block;
+  position: absolute;
+  z-index: 6;
+  margin-top: 0;
+  margin-left: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: #d8d8d8;
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.player .progress-container .transparent-seeker-layer {
+  width: 100%;
+  height: 6px;
+  background-color: transparent;
+  position: absolute;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.player .progress-container .bar {
+  width: 0;
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #3927ff), to(#ffa883));
+  background: -webkit-linear-gradient(left, #3927ff 20%, #ffa883 100%);
+  background: -o-linear-gradient(left, #3927ff 20%, #ffa883 100%);
+  background: linear-gradient(90deg, #3927ff 20%, #ffa883 100%);
+  height: 4px;
+  position: absolute;
+}
+
+.player .status {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 15px 40px;
+}
+
+.player .status .time {
+  color: #474747;
+  font-weight: 600;
+  height: 52px;
+  line-height: 52px;
+}
+
+.player .status .time.show {
+  color: #fff;
+}
+
+.player .status .control {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 300px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.player .status .control.show .btn {
+  color: #fff;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.player .status .control.show .btn:hover i {
+  color: #9d68c1;
+}
+
+.player .status .control.show i {
+  color: #fff;
+}
+
+.player .status .btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+  pointer-events: none;
+  cursor: default;
+}
+
+.player .status .btn i {
+  font-size: 26px;
+  font-weight: 600;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.player .status .btn-play i {
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.player .status .volume {
+  position: absolute;
+  right: 0;
+  -webkit-transform: translateX(-20%);
+      -ms-transform: translateX(-20%);
+          transform: translateX(-20%);
+  height: 52px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.player .status .volume i {
+  font-size: 26px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.player .range-bar {
+  position: relative;
+}
+
+.player .range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0px;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.player .range:focus {
+  outline: none;
+}
+
+.player .range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+}
+
+.player .range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  display: inline-block;
+  width: 0px;
+  height: 5px;
+  background: #888585;
+  cursor: pointer;
+  position: relative;
+  top: -13px;
+}
+
+.player .fill {
+  position: relative;
+  pointer-events: none;
+  width: 0%;
+  height: 0px;
+  padding: 3px 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  cursor: pointer;
+  background: #888585;
+  border: none;
+  top: -13px;
+}
+
+#music {
+  display: none;
+}
+
+/*----------  albums  ----------*/
+.albums {
+  display: block;
+}
+
+.albums .album-banner {
+  width: 100%;
+  height: 234px;
+  background-image: url(../images/bg-cover-1.jpg);
+  background-size: cover;
+  background-position: center center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 30px 60px;
+  position: relative;
+}
+
+.albums .album-banner:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 234px;
+  background: rgba(22, 22, 22, 0.8);
+  z-index: 1;
+}
+
+.albums .album-banner .banner-cover {
+  margin-right: 35px;
+  z-index: 10;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.albums .album-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 172px;
+  z-index: 10;
+}
+
+.albums .album-content .album-name {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.albums .album-content .artist-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ababab;
+}
+
+.albums .album-content .btn-play-album {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 170px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: -webkit-gradient(linear, left top, right top, from(#3927ff), to(#ffa883));
+  background: -webkit-linear-gradient(left, #3927ff 0%, #ffa883 100%);
+  background: -o-linear-gradient(left, #3927ff 0%, #ffa883 100%);
+  background: linear-gradient(90deg, #3927ff 0%, #ffa883 100%);
+}
+
+.albums .album-content .btn-play-album:hover {
+  color: #9d68c1;
+  background: -webkit-gradient(linear, left top, right top, from(#fff));
+  background: -webkit-linear-gradient(left, #fff);
+  background: -o-linear-gradient(left, #fff);
+  background: linear-gradient(90deg, #fff);
+}
+
+.albums .album-content .btn-play-album i {
+  margin-right: 7px;
+}
+
+.albums .album-lists {
+  padding: 20px 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-top: 30px;
+  margin-bottom: 110px;
+}
+
+.albums .album-lists .album-item {
+  display: inline-block;
+  margin-right: 40px;
+  margin-bottom: 30px;
+  width: 172px;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.albums .album-lists .album-item:hover .album-cover {
+  border: 4px solid #e5bfff;
+}
+
+.albums .album-lists .album-item:hover .album-name {
+  color: #e5bfff;
+}
+
+.albums .album-lists .current:hover .album-cover {
+  border: 4px solid #9d68c1;
+  -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+          box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+}
+
+.albums .album-lists .current:hover .album-name {
+  color: #9d68c1;
+  text-shadow: 0 3px 5px black;
+}
+
+.albums .album-lists .current .album-cover {
+  border: 4px solid #9d68c1;
+  -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+          box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.7);
+}
+
+.albums .album-lists .current .album-name {
+  color: #9d68c1;
+  text-shadow: 0 3px 5px black;
+}
+
+.albums .album-lists .album-cover {
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+  border: 4px solid transparent;
+  display: inline-block;
+}
+
+.albums .album-lists .album-name {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #fff;
+  padding-left: 7px;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+/*----------  playlists  ----------*/
+.playlists {
+  display: none;
+  width: 100%;
+  height: 336px;
+  background-image: url(../images/bg-cover-1.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+.playlists:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 336px;
+  background: rgba(22, 22, 22, 0.8);
+  z-index: 1;
+}
+
+.playlists .album-banner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  padding: 30px 60px;
+  margin-top: 100px;
+  z-index: 10;
+}
+
+.playlists .banner-cover {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  position: relative;
+  margin-right: 35px;
+  z-index: 10;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.playlists .banner-cover .album-cover {
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  margin-right: 35px;
+  z-index: 10;
+}
+
+.playlists .album-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  height: 172px;
+  z-index: 10;
+}
+
+.playlists .album-content .album-name {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.playlists .album-content .artist-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ababab;
+}
+
+.playlists .album-content .back-album {
+  border-radius: 50%;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 90px;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.playlists .album-content .back-album .btn-back-album {
+  width: 82px;
+  height: 82px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 50%;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+  background: -webkit-gradient(linear, left top, right top, from(#3927ff), to(#ffa883));
+  background: -webkit-linear-gradient(left, #3927ff 0%, #ffa883 100%);
+  background: -o-linear-gradient(left, #3927ff 0%, #ffa883 100%);
+  background: linear-gradient(90deg, #3927ff 0%, #ffa883 100%);
+}
+
+.playlists .album-content .back-album .btn-back-album:hover {
+  color: #9d68c1;
+  background: -webkit-gradient(linear, left top, right top, from(#fff));
+  background: -webkit-linear-gradient(left, #fff);
+  background: -o-linear-gradient(left, #fff);
+  background: linear-gradient(90deg, #fff);
+}
+
+.playlists .album-content .back-album i {
+  font-size: 38px;
+}
+
+.playlists .play-lists {
+  padding: 20px 60px;
+  margin-top: 30px;
+  margin-bottom: 110px;
+}
+
+.playlists .list-item {
+  width: 100%;
+  height: 54px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 600;
+  background: #2a2a2a;
+  color: #fff;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.playlists .list-item:nth-child(odd) {
+  background: #222222;
+}
+
+.playlists .list-item:hover {
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #2b293e), to(#3d3533));
+  background: -webkit-linear-gradient(left, #2b293e 20%, #3d3533 100%);
+  background: -o-linear-gradient(left, #2b293e 20%, #3d3533 100%);
+  background: linear-gradient(90deg, #2b293e 20%, #3d3533 100%);
+}
+
+.playlists .active {
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #2b293e), to(#3d3533)) !important;
+  background: -webkit-linear-gradient(left, #2b293e 20%, #3d3533 100%) !important;
+  background: -o-linear-gradient(left, #2b293e 20%, #3d3533 100%) !important;
+  background: linear-gradient(90deg, #2b293e 20%, #3d3533 100%) !important;
+}
+
+.playlists .num {
+  margin-left: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.playlists .num i {
+  color: #474747;
+  margin-right: 20px;
+  opacity: 0.7;
+  border: 2px solid #474747;
+  padding: 2px;
+}
+
+.playlists .info {
+  margin-right: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.playlists .duration {
+  margin-right: 7px;
+}
+
+/*----------  custom scroll  ----------*/
+/*# sourceMappingURL=style.css.map */
